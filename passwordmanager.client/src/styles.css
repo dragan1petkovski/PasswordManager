@@ -1,0 +1,42 @@
+.nospaceincell
+{
+	width:1%;
+	white-space: nowrap;
+}
+
+.maxwidth {
+	max-width: 1920px;
+}
+
+/* table { */
+	/* border: 1px solid black; */
+	/* border-radius: 7px; */
+/* } */
+
+.globalborders {
+	/* border-collapse: separate; */
+	border: 1px solid black;
+	border-radius: 7px;
+  
+}
+.bottomborder {
+	border-bottom: 2px solid black;
+}
+
+.options {
+	width: 1%; white-space: nowrap;
+}
+
+td, th
+{
+	padding: 0.5rem
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.headerborder {
+	/* border-collapse: separate !important; */
+	border: 1px solid black;
+	border-radius: 7px;
+  
+}

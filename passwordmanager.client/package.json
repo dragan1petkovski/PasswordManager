@@ -1,0 +1,38 @@
+{
+  "name": "passwordmanager.client",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "run-script-os",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "prestart": "node aspnetcore-https",
+    "start:windows": "ng serve --ssl --ssl-cert \"D:\\Csharp\\PasswordManager\\cm-test-local.crt\" --ssl-key \"D:\\Csharp\\PasswordManager\\cm-test-local.key\" --host=cm.test.local",
+    "start:default": "ng serve --ssl --ssl-cert \"D:\\Csharp\\PasswordManager\\cm-test-local.crt\" --ssl-key \"D:\\Csharp\\PasswordManager\\cm-test-local.key\" --host=cm.test.local"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.0",
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "angular-oauth2-oidc": "^22.0.2",
+    "jest-editor-support": "*",
+    "run-script-os": "*",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.1.8",
+    "@angular/cli": "^22.1.8",
+    "@angular/compiler-cli": "^22.1.0",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.8"
+  }
+}
