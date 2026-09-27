@@ -1,0 +1,11 @@
+<div class="d-flex m-0 mb-2" >
+	<div class="col">
+		<button class="btn btn-outline-dark nav-link-activate" id="nav-link-Credential" (click)="SetComponent('Client')">Client</button>&nbsp;
+		<button class="btn btn-outline-dark nav-link-activate" id="nav-link-Certificate" (click)="SetComponent('User')">User</button>&nbsp;
+		<button class="btn btn-outline-dark nav-link-activate" id="nav-link-Certificate" (click)="SetComponent('Team')">Team</button>&nbsp;
+	</div>
+	<button class="btn btn-outline-dark" (click)="SignOut()">SignOut</button>
+</div>
+<div class="w-100" >
+ 	<router-outlet></router-outlet>
+</div>

@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{header}}</h5>
+</div>
+<div class="modal-body">
+    <div class="d-flex justify-content-between">
+		<div class="w-100">
+			<div class="text-center bottomborder mb-1">All {{this.type}}</div>
+			<div cdkDropList id="allItems_id" [cdkDropListData]="allItems" [cdkDropListConnectedTo]="['activeItems_id']" (cdkDropListDropped)="drop($event)" style="min-height: 50px;" class="w-100">
+				<div cdkDrag *ngFor="let item of allItems"class="globalborders mb-1 ps-1">{{item.name}}</div>			
+			</div>
+		</div>
+		&nbsp;
+		<div class="vr"></div>
+		&nbsp;
+		<div class="w-100">
+			<div class="text-center bottomborder mb-1">Active {{this.type}}</div>
+			<div cdkDropList id="activeItems_id" [cdkDropListData]="activeItems" [cdkDropListConnectedTo]="['allItems_id']" (cdkDropListDropped)="drop($event)" style="min-height: 50px;" class="w-100">
+				<div cdkDrag *ngFor="let item of activeItems" class="globalborders mb-1 ps-1">{{item.name}}</div>					
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-dark" (click)="UpdateMembership()">Save</button>
+    <button class="btn btn-info" (click)="activeModal.close()">Close</button>
+</div>

@@ -1,14 +1,16 @@
 ﻿using ApplicationStatusCode;
-using DataTransferObject;
+using DataTransferObjects.User;
+using DataTransferObjects.Membership;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using System.Text.Json;
-using WebCM.Utilities;
 using DomainModel;
+using PasswordManager.Server.StaticObjects;
 
-namespace WebCM.Controllers
+namespace PasswordManager.Server.Controllers
 {
+	[ApiController]
 	public class UserController	: ControllerBase
 	{
 		private readonly SvcUser _service;

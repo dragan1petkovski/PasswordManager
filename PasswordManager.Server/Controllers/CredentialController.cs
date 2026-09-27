@@ -1,14 +1,10 @@
 ﻿using ApplicationStatusCode;
-using DataLayer;
-using DataTransferObject;
-using DataTransferObject.Credential;
+using DataTransferObjects.Credential;
 using DomainModel;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using SvcAudit;
-using WebCM.Utilities;
+using PasswordManager.Server.StaticObjects;
 
 namespace WebCM.Controllers
 {

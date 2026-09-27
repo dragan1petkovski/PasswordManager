@@ -1,2 +1,9 @@
-<div>THis is home page</div>
-<div>Login successful</div>
+<div class="d-flex m-0 mb-2" >
+	<div class="col">
+		<button class="btn btn-outline-dark nav-link-activate me-2" id="nav-link-Credential" (click)="SetComponent('Credential')">Credentials</button>
+	</div>
+	<button class="btn btn-outline-dark" (click)="SignOut()">SignOut</button>
+</div>
+<div class="w-100" >
+ 	<router-outlet></router-outlet>
+</div>

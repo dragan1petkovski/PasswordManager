@@ -1,0 +1,68 @@
+<div id="ClientComponent">
+    <div class="d-flex justify-content-between mb-2">
+    	<div>
+    		<button class="btn btn-outline-dark bi bi-arrow-repeat" (click)="ADSync()" ></button>&nbsp;
+    	</div>
+    	<div class="d-flex justify-content-end">
+    		<div class="me-2">
+    			<input type="text" placeholder="search" class="btn btn-outline-dark" id="search">
+    		</div>
+    		<div>
+    			<button class="btn btn-outline-dark bi bi-search" ></button>
+    		</div>
+    	</div>
+
+    </div>
+    <div>
+        <alert-component />
+		<div class="globalborders">
+        	<table class="w-100">
+        	    <thead>
+        	    <tr>
+        	        <th class="ps-2">First Name</th>
+					<th class="ps-2">Last Name</th>
+					<th class="ps-2">E-mail</th>
+					<th class="ps-2">Username</th>
+					<th class="ps-2">Role</th>
+        	        <th class="ps-2">Create Date</th>
+        	        <th class="ps-2">Update Date</th>
+					<th></th>
+        	    </tr>
+			
+        	    </thead>
+        	    <tbody class="table-group-divider">
+        	    <tr *ngFor="let item of this.userList">
+        	        <td class="ps-2">
+        	            {{item.name}}
+        	        </td>
+        	        <td class="ps-2">
+        	            {{item.lastname}}
+        	        </td>
+        	        <td class="ps-2">
+        	            {{item.email}}
+        	        </td>
+        	        <td class="ps-2">
+        	            {{item.username}}
+        	        </td>
+        	        <td class="ps-2">
+        	            {{item.role}}
+        	        </td>
+        	        <td class="ps-2 options">
+        	            {{item.createdate | date : 'dd.MM.yyyy HH:mm:ss'}}
+        	        </td>
+        	        <td class="ps-2 options">
+        	            {{item.updatedate | date : 'dd.MM.yyyy HH:mm:ss'}}
+        	        </td>
+					<td class="ps-2 options">
+						<button class="btn btn-outline-dark bi bi-people" (click)="OpenMembershipModal(item.id)"></button>
+					</td>
+				
+        	    </tr>
+        	    </tbody>
+			
+        	</table>
+		</div>
+
+
+    </div>
+</div>

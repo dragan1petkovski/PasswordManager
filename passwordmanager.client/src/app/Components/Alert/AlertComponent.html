@@ -1,0 +1,7 @@
+@if(showAlert)
+{
+	<ngb-alert [type]="type" (closed)="showAlert = false" >{{ message }}</ngb-alert>
+}
+
+
+<!-- [dismissible]="true" -->

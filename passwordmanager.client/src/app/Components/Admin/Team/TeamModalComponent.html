@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h5 class="modal-title">Create Team</h5>
+</div>
+<div class="modal-body">
+    <form [formGroup]="createTeam">
+        <div class="d-flex justify-content-center">
+            <div class="flex-shirink-0 me-2">
+                <p>Team Name@if (this.createTeam.controls.name.invalid) {
+                    <span class="text-danger">*</span>
+                } </p>
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" formControlName="name" >
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="flex-shirink-0 me-2">
+                <p>Client Name@if (this.createTeam.controls.name.invalid) {
+                    <span class="text-danger">*</span>
+                } </p>
+            </div>
+            <div class="col-6">
+                <select name="clients" id="chooseclient" class="form-control w-100" formControlName="clientchoice">
+                    @for (client of clients; track client) {
+                        <option value={{client.id}}>{{client.name}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+        @if(this.createTeam.controls.name.invalid)
+        {
+            @if(this.createTeam.controls.name.dirty || this.createTeam.controls.name.touched)
+            {
+                <p>Invalid Username</p>
+            }
+        }
+    </form>
+</div>
+<div class="modal-footer">
+    @if(team === null)
+    {
+        <button class="btn btn-danger" (click)="CreateTeam()" [disabled]="this.createTeam.invalid">Create Team</button>
+    }
+    @else{
+        <button class="btn btn-danger" (click)="UpdateTeam()" [disabled]="this.createTeam.invalid">Update Team</button>
+    }
+    <button class="btn btn-secondary" (click)="activeModal.close()">Close</button>
+</div>

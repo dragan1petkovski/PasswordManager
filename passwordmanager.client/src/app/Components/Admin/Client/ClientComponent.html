@@ -1,0 +1,52 @@
+<div id="ClientComponent">
+    <div class="d-flex justify-content-between mb-2">
+    	<div>
+    		<button class="btn btn-outline-dark bi bi-plus" (click)="OpenClientModal()"></button>&nbsp;
+    	</div>
+    	<div class="d-flex justify-content-end">
+    		<div class="me-2">
+    			<input type="text" placeholder="search" class="btn btn-outline-dark" id="search">
+    		</div>
+    		<div>
+    			<button class="btn btn-outline-dark bi bi-search" (click)="SendSearchParameter()"></button>
+    		</div>
+    	</div>
+
+    </div>
+    <div>
+        <alert-component />
+		<div class="globalborders">
+        	<table class="w-100">
+        	    <thead>
+        	    <tr>
+        	        <th class="ps-2">Name</th>
+        	        <th class="ps-2">Create Date</th>
+        	        <th class="ps-2">Update Date</th>
+					<th class="ps-2"></th>
+        	    </tr>
+			
+        	    </thead>
+        	    <tbody class="table-group-divider">
+        	    <tr *ngFor="let item of this.itemList">
+        	        <td class="ps-2">
+        	            {{item.name}}
+        	        </td>
+        	        <td class="ps-2 options">
+        	            {{item.createdate | date : 'dd.MM.yyyy HH:mm:ss'}}
+        	        </td>
+        	        <td class="ps-2 options">
+        	            {{item.updatedate | date : 'dd.MM.yyyy HH:mm:ss'}}
+        	        </td>
+        	        <td class="ps-2 options">
+        	            <button class="btn btn-outline-dark bi bi-trash" (click)="OpenDeleteModal(item)" ></button>&nbsp;
+        	            <button class="bi bi-pencil btn btn-outline-dark" (click)="OpenClientModal(item)"></button>
+        	        </td>
+        	    </tr>
+        	    </tbody>
+			
+        	</table>
+		</div>
+
+
+    </div>
+</div>
