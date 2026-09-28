@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
-import { ConnectionService } from "../../../Services/HTTPClient/connection.service";
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 import { regex_patterns } from "../../../StaticObjects/regexpatterns";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
@@ -13,7 +13,7 @@ import { GetTeamResponse } from "../../../DTO/Team/GetTeamResponse";
 	standalone: true,
 	templateUrl: "CredentialModalComponent.html",
 	imports: [ReactiveFormsModule,ClipboardModule],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 
 export class CredentialModalComponent{
@@ -31,7 +31,7 @@ export class CredentialModalComponent{
 		
 	})
 
-	constructor(protected activeModal: NgbActiveModal, private conService: ConnectionService) {
+	constructor(protected activeModal: NgbActiveModal, private conService: ConnectionSvc) {
 	}
 
 	ngOnInit()

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateAdministrator} from '../../Services/HTTPClient/authentication.service';
+import { canActivateAdministrator} from '../../Services/ConnectionSvc/AuthenticationSvc';
 
 
 export const Admin_routes: Routes = [

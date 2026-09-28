@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
-import {ConnectionService} from '../../Services/HTTPClient/connection.service';
+import {ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
 import { User } from "../../DTO/User/User"
 import { Team } from "../../DTO/Team/Team"
 import { api_endpoints } from "../../StaticObjects/api_endpoints";
@@ -24,7 +24,7 @@ export class MembershipModalComponent{
 	protected activeItems!:MemberItem[]
 	protected allItems!:MemberItem[]
 
-	constructor(public activeModal: NgbActiveModal, private conService: ConnectionService) {}
+	constructor(public activeModal: NgbActiveModal, private conService: ConnectionSvc) {}
 
 	ngOnInit()
 	{

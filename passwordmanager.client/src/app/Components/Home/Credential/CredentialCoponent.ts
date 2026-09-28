@@ -1,7 +1,6 @@
 import { Component, Inject, effect, inject} from "@angular/core"
 import { DatePipe } from "@angular/common";
-import { IS_PRIVATE } from "../../../Tokens/Private.token"
-import { ConnectionService } from "../../../Services/HTTPClient/connection.service";
+import { ConnectionSvc } from "../../../Services/ConnectionSvc/ConnectionSvc";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
 import { ClientResponse } from "../../../DTO/Client/ClientResponse"
 import { AlertComponent } from "../../Alert/AlertComponent"
@@ -26,7 +25,7 @@ export class CredentialComponent{
 	private clipboard = inject(Clipboard);
 
 	protected showComponent:boolean = false
-	constructor(private http: ConnectionService,private modalService: NgbModal) {
+	constructor(private http: ConnectionSvc,private modalService: NgbModal) {
         effect(() => {
             let temp = this.alertService.GetAlert()()
             if(temp.type === 'success')

@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { OidcFlowConfig } from "../oidc.config"
+import { OidcFlowConfig } from "../../StaticObjects/Configs/oidc.config"
 // export function LoginIntercepror(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
 // 	console.log("This is login Interceptor")
 // 	let addAuthorization = req.clone()

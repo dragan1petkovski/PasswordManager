@@ -1,8 +1,8 @@
 import { Component,signal,ChangeDetectorRef  } from "@angular/core"
 import { OAuthService } from "angular-oauth2-oidc";
-import { adfs_config } from "../../StaticObjects/AdfsRoles"
+import { OidcFlowConfig } from "../../StaticObjects/Configs/oidc.config"
 import { Router, RouterModule } from "@angular/router";
-import { ConnectionService } from '../../Services/HTTPClient/connection.service';
+import { ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { ConnectionService } from '../../Services/HTTPClient/connection.service'
 })
 export class HomeComponent
 {
-	constructor(private changedetection: ChangeDetectorRef,private router: Router, private conService: ConnectionService, private authService: OAuthService){}
+	constructor(private changedetection: ChangeDetectorRef,private router: Router, private conService: ConnectionSvc, private authService: OAuthService){}
 
 	ngOnInit()
 	{
@@ -62,7 +62,7 @@ export class HomeComponent
 
 	public SignOut()
 	{
-		this.authService.logoutUrl = adfs_config.logout
+		this.authService.logoutUrl = OidcFlowConfig.logoutUrl
 		this.authService.logOut({
 			id_token_hint: `${sessionStorage.getItem("id_token")}`,
 			post_logout_redirect_uri: "https://cm.test.local"

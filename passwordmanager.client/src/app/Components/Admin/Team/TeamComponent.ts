@@ -2,7 +2,7 @@ import { Component, inject, effect } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
 import {GetTeamResponse} from '../../../DTO/Team/GetTeamResponse';
-import {ConnectionService} from '../../../Services/HTTPClient/connection.service';
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import {AlertService} from '../../../Services/AlertService';
 import {AlertComponent} from '../../Alert/AlertComponent';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
@@ -15,7 +15,7 @@ import { Team } from "../../../DTO/Team/Team"
     standalone: true,
     templateUrl: 'TeamComponent.html',
     imports: [CommonModule, DatePipe, AlertComponent],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 
 export class TeamComponent
@@ -23,7 +23,7 @@ export class TeamComponent
 
     protected itemList!: GetTeamResponse[]
     alertService = inject(AlertService);
-    constructor(private http:ConnectionService, private modalService: NgbModal) {
+    constructor(private http:ConnectionSvc, private modalService: NgbModal) {
         // This is used to make additional request if the HTTP request is successful
         effect(() => {
             let temp = this.alertService.GetAlert()()

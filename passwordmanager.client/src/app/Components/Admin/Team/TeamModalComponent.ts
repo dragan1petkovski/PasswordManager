@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ConnectionService } from "../../../Services/HTTPClient/connection.service";
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { regex_patterns } from "../../../StaticObjects/regexpatterns";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
@@ -12,12 +12,12 @@ import {TeamRequest} from '../../../DTO/Team/TeamRequest';
     standalone:true,
     templateUrl: "TeamModalComponent.html",
     imports: [ReactiveFormsModule],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 
 export class TeamModalComponent
 {
-	constructor(private conService: ConnectionService, protected activeModal: NgbActiveModal) {}
+	constructor(private conService: ConnectionSvc, protected activeModal: NgbActiveModal) {}
 	protected clients: ClientResponse[] = []
     protected team!: GetTeamResponse
 	createTeam = new FormGroup({

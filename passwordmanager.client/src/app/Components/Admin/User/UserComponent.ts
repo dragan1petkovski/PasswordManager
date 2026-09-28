@@ -3,19 +3,18 @@ import { CommonModule,DatePipe } from "@angular/common";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import {AlertComponent} from '../../Alert/AlertComponent';
-import {ConnectionService} from '../../../Services/HTTPClient/connection.service';
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { UserResponse } from "../../../DTO/User/UserResponse"
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
 import { AlertService } from "../../../Services/AlertService"
 import { MembershipModalComponent } from "../../Modals/MembershipModalComponent"
 import { User } from "../../../DTO/User/User"
-import { ClientRequest } from "../../../DTO/Client/CreateClientRequest";
 import { ResponseMessage } from "../../../DTO/ResponseMessage/ResponseMessage"
 @Component({
     selector: "user",
     templateUrl: 'UserComponent.html',
 	imports: [CommonModule,DatePipe,AlertComponent],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 
 export class UserComponent
@@ -23,7 +22,7 @@ export class UserComponent
 	private routersubscript!: Subscription;
 	protected userList: UserResponse[] = []
 	alertService = inject(AlertService);
-	constructor(private http: ConnectionService,private modalService: NgbModal) {
+	constructor(private http: ConnectionSvc,private modalService: NgbModal) {
         
 		// This is used to make additional request if the HTTP request is successful
         effect(() => {

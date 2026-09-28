@@ -3,7 +3,7 @@ import { CommonModule,DatePipe } from "@angular/common";
 import {ClientResponse} from '../../../DTO/Client/ClientResponse';
 import {DeleteModalComponent} from '../../Modals/DeleteModalComponent';
 import {api_endpoints} from '../../../StaticObjects/api_endpoints';
-import {ConnectionService} from '../../../Services/HTTPClient/connection.service';
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import {ClientModalComponent} from './ClientModalComponent';
 import {AlertComponent} from '../../Alert/AlertComponent';
@@ -14,14 +14,14 @@ import {AlertService} from '../../../Services/AlertService';
     selector: "client",
     templateUrl: 'ClientComponent.html',
     imports: [CommonModule,DatePipe,AlertComponent],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 //Modal animation makes 300ms delay and can cause warning
 export class ClientComponent
 {
     alertService = inject(AlertService);
 
-    constructor(private http: ConnectionService,private modalService: NgbModal) {
+    constructor(private http: ConnectionSvc,private modalService: NgbModal) {
         
 		// This is used to make additional request if the HTTP request is successful
         effect(() => {

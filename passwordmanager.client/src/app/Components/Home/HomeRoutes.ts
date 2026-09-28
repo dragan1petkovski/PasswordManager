@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateUser} from '../../Services/HTTPClient/authentication.service';
-import { IS_PRIVATE } from '../../Tokens/Private.token';
+import { canActivateUser} from '../../Services/ConnectionSvc/AuthenticationSvc';
 
 
 export const Home_routes: Routes = [

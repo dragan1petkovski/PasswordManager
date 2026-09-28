@@ -1,7 +1,7 @@
 import { Component, Input, inject } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 import {DeleteItemRequest} from '../../DTO/DeleteItemRequest';
-import {ConnectionService} from '../../Services/HTTPClient/connection.service';
+import {ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
 import {api_endpoints} from '../../StaticObjects/api_endpoints';
 import {ResponseMessage} from '../../DTO/ResponseMessage/ResponseMessage';
 import { AlertService} from '../../Services/AlertService';
@@ -17,7 +17,7 @@ export class DeleteModalComponent {
     @Input() item!:DeleteItemRequest;
     protected responseMessage!: ResponseMessage;
     alertService = inject(AlertService);
-    constructor(public activeModal: NgbActiveModal, private conService: ConnectionService) {}
+    constructor(public activeModal: NgbActiveModal, private conService: ConnectionSvc) {}
 
     public async DeleteItem()
     {

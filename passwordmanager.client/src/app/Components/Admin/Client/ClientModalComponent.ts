@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { ConnectionService } from "../../../Services/HTTPClient/connection.service";
+import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { regex_patterns } from "../../../StaticObjects/regexpatterns";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
@@ -12,7 +12,7 @@ import { ClientRequest } from '../../../DTO/Client/CreateClientRequest';
     standalone: true,
     templateUrl: "ClientModalComponent.html",
     imports: [ReactiveFormsModule],
-    providers: [ConnectionService],
+    providers: [ConnectionSvc],
 })
 
 export class ClientModalComponent
@@ -26,7 +26,7 @@ export class ClientModalComponent
 		name: new FormControl("",[Validators.required,Validators.pattern(regex_patterns.username)])
 	})
 
-	constructor(protected activeModal: NgbActiveModal, private conService: ConnectionService) {}
+	constructor(protected activeModal: NgbActiveModal, private conService: ConnectionSvc) {}
 
 
     ngOnInit() {
