@@ -1,19 +1,22 @@
 ﻿using ApplicationStatusCode;
-using DataTransferObjects.User;
 using DataTransferObjects.Membership;
+using DataTransferObjects.User;
+using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services;
-using System.Text.Json;
-using DomainModel;
+using Microsoft.Extensions.Caching.Memory;
 using PasswordManager.Server.StaticObjects;
+using Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json;
+using DataTransferObjects.Adfs;
 
 namespace PasswordManager.Server.Controllers
 {
 	[ApiController]
 	public class UserController	: ControllerBase
 	{
-		private readonly SvcUser _service;
+        private readonly SvcUser _service;
 		private readonly IServiceProvider _serviceProvider;
 
 
@@ -21,9 +24,33 @@ namespace PasswordManager.Server.Controllers
 		{
 			_service = service;
 			_serviceProvider = serviceProvider;
-		}
+        }
 
-		[HttpPost("[controller]")]
+        [HttpGet("/[controller]/me")]
+        [Authorize(Roles = $"{AdfsRoles.userrole}, {AdfsRoles.adminrole}")]
+        public IActionResult Me([FromServices] IMemoryCache _cache)
+        {
+            if (Guid.TryParse(this.Request.Cookies["_id"], out Guid tokenId))
+            {
+                AccessTokenResponse adfsResponse = _cache.Get<AccessTokenResponse>(tokenId);
+                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+                JwtSecurityToken access_token = handler.ReadJwtToken(adfsResponse.access_token);
+                UserProfile profile = new UserProfile()
+                {
+                    display_name = access_token.Payload["unique_name"].ToString(),
+                    email = access_token.Payload["email"].ToString(),
+                    surname = access_token.Payload["family_name"].ToString(),
+                    role = access_token.Payload["role"].ToString(),
+                    given_name = access_token.Payload["given_name"].ToString()
+
+                };
+                return Ok(profile);
+            }
+            return NotFound();
+        }
+
+
+        [HttpPost("[controller]")]
         [Authorize(Roles = $"{AdfsRoles.adminrole}")]
         public IActionResult ADUserSync()
 		{
