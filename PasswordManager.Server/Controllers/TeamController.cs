@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using Services.Audit;
+using DataTransferObjects.User;
 using DomainModel;
 using PasswordManager.Server.StaticObjects;
 using DataTransferObjects.Membership;

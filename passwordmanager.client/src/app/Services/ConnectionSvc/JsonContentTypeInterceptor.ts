@@ -9,6 +9,7 @@ export function JsonContentTypeInterceptor(req: HttpRequest<unknown>, next: Http
 	{
 		return next(req)
 	}
+
 	const router = Inject(Router)
 	let addAuthorization = req.clone({
   				headers: req.headers.set("Content-Type", `application/json`),

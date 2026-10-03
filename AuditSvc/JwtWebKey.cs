@@ -15,7 +15,7 @@ namespace Services.Audit
 		//TO DO: Make the code more resiliat on ADFS failure
 		public static IEnumerable<SecurityKey>  GetADFSKeys(IConfiguration config)
 		{
-			var oidc = config.GetSection("OpenIdConnectSettings");
+			var oidc = config.GetSection("oauth2");
 			using (HttpClient httpClient = new HttpClient())
 			{
 				HttpResponseMessage jwks_response = httpClient.GetAsync(oidc["jwks_uri"].ToString()).Result;

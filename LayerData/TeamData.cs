@@ -2,7 +2,7 @@
 using DBLayer;
 using DomainModel;
 using Microsoft.EntityFrameworkCore;
-using Services.Audit;
+using DataTransferObjects.User;
 
 namespace LayerData
 {

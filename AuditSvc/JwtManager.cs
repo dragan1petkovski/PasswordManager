@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-
+using DataTransferObjects.User;
 namespace Services.Audit
 {
 	public class JwtManager
@@ -9,11 +9,10 @@ namespace Services.Audit
 		private JwtPayload GetJWTPayload(string jwt)
 		{
 
-			string jwtdata = jwt.Split(" ")[1];
 			try
 			{
 				JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-				JwtSecurityToken t = handler.ReadJwtToken(jwtdata);
+				JwtSecurityToken t = handler.ReadJwtToken(jwt);
 				return t.Payload;
 			}
 			catch

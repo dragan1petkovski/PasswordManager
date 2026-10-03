@@ -32,16 +32,14 @@ namespace PasswordManager.Server.Controllers
         {
             if (Guid.TryParse(this.Request.Cookies["_id"], out Guid tokenId))
             {
-                AccessTokenResponse adfsResponse = _cache.Get<AccessTokenResponse>(tokenId);
-                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                JwtSecurityToken access_token = handler.ReadJwtToken(adfsResponse.access_token);
+                UserSession _userSession = _cache.Get<UserProfileDetails>(tokenId).userSession;
                 UserProfile profile = new UserProfile()
                 {
-                    display_name = access_token.Payload["unique_name"].ToString(),
-                    email = access_token.Payload["email"].ToString(),
-                    surname = access_token.Payload["family_name"].ToString(),
-                    role = access_token.Payload["role"].ToString(),
-                    given_name = access_token.Payload["given_name"].ToString()
+                    display_name = $"{_userSession.givenname} {_userSession.surname}",
+                    email = _userSession.email,
+                    surname = _userSession.surname,
+                    role = _userSession.role,
+                    given_name = _userSession.givenname
 
                 };
                 return Ok(profile);

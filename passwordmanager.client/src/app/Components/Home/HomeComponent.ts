@@ -3,6 +3,7 @@ import { OAuthService } from "angular-oauth2-oidc";
 import { OidcFlowConfig } from "../../StaticObjects/Configs/oidc.config"
 import { Router, RouterModule } from "@angular/router";
 import { ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
+import { lastValueFrom } from "rxjs"
 
 
 @Component({
@@ -62,10 +63,6 @@ export class HomeComponent
 
 	public SignOut()
 	{
-		this.authService.logoutUrl = OidcFlowConfig.logoutUrl
-		this.authService.logOut({
-			id_token_hint: `${sessionStorage.getItem("id_token")}`,
-			post_logout_redirect_uri: "https://cm.test.local"
-		})
+        this.conService.GETtext("logout").subscribe(res => window.location.href = res)
 	}
 }

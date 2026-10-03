@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using ApplicationStatusCode;
-using Services.Audit;
+using DataTransferObjects.User;
 using Microsoft.AspNetCore.Mvc;
 using DataTransferObjects.Client;
 using Services;
@@ -36,7 +36,6 @@ namespace WebCM.Controllers
 		[Authorize(Roles = $"{AdfsRoles.adminrole},{AdfsRoles.userrole}")]
 		public IEnumerable<ClientResponse> Get()
 		{
-			Console.WriteLine($"userrole: {_userSession.email}");
 			switch (_userSession.role)
 			{
 				case AdfsRoles.adminrole:

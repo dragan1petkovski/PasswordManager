@@ -1,7 +1,7 @@
 ﻿using DataTransferObjects.Credential;
 using DBLayer;
 using Microsoft.EntityFrameworkCore;
-using Services.Audit;
+using DataTransferObjects.User;
 
 
 namespace LayerData

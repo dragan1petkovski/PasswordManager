@@ -1,4 +1,4 @@
-import { Component, Inject, effect, inject} from "@angular/core"
+import { Component, effect, inject,WritableSignal,signal} from "@angular/core"
 import { DatePipe } from "@angular/common";
 import { ConnectionSvc } from "../../../Services/ConnectionSvc/ConnectionSvc";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
@@ -19,8 +19,8 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 
 export class CredentialComponent{
-	clientList!:ClientResponse[]
-	credentialList!:CredentialResponse[]
+	clientList:WritableSignal<ClientResponse[]>=signal([])
+	credentialList:WritableSignal<CredentialResponse[]>=signal([])
 	alertService = inject(AlertService);
 	private clipboard = inject(Clipboard);
 
@@ -33,7 +33,7 @@ export class CredentialComponent{
 				let activeClinetBtn:HTMLCollection = document.getElementsByClassName("nav-buttons active")
 				if(activeClinetBtn.length === 1)
 				{
-					this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${activeClinetBtn[0].id}`)).subscribe(res => this.credentialList = res)
+					this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${activeClinetBtn[0].id}`)).subscribe(res => this.credentialList.set(res))
 				}
             }
         });
@@ -43,9 +43,9 @@ export class CredentialComponent{
 	ngOnInit()
 	{
 		this.http.GET<ClientResponse[]>(api_endpoints.client).subscribe(res => {
-			this.clientList = res;
+			this.clientList.set(res);
 			this.showComponent = true
-			this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${this.clientList[0].id}`)).subscribe(res => this.credentialList = res)
+			this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${this.clientList()[0].id}`)).subscribe(res => this.credentialList.set(res))
 		})
 	}
 
@@ -85,7 +85,7 @@ export class CredentialComponent{
 		{
 			let navlink = document.getElementById(id)
 			navlink?.classList.add("active")
-			this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${id}`)).subscribe(res => this.credentialList = res)
+			this.http.GET<CredentialResponse[]>(api_endpoints.credential.concat(`?clientid=${id}`)).subscribe(res => this.credentialList.set(res))
 
 		}
 		catch

@@ -1,5 +1,5 @@
 ﻿using DBLayer;
-using Services.Audit;
+using DataTransferObjects.User;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

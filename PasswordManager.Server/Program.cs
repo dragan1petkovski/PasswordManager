@@ -1,12 +1,14 @@
+using DataTransferObjects.User;
+using DBLayer;
+using LayerData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PasswordManager.Server.MiddleWare;
+using PasswordManager.Server.Utilities;
 using Serilog;
-using DBLayer;
 using Services;
 using Services.Audit;
-using PasswordManager.Server.Utilities;
-using LayerData;
 
 namespace PasswordManager.Server
 {
@@ -15,11 +17,20 @@ namespace PasswordManager.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            string connectionstring = builder.Configuration.GetSection("ConnectionStrings").GetSection("sqlConnection").Value;
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
                 .Enrich.FromLogContext()
                 .CreateLogger();
+
+            try
+            {
+                builder.Services.AddDbContext<MSSQLContext>(option => option.UseSqlServer(connectionstring));
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal("Can NOT connect to the database - {0}\nDetails:\n{1}\n\n", DateTime.Now, ex.ToString());
+            }
 
             // Add services to the container.
             builder.Services.AddControllers();
@@ -80,7 +91,7 @@ namespace PasswordManager.Server
             app.UseHttpsRedirection();
             
             app.UseMiddleware<CookieAuthenticationMiddleware>();
-
+            app.UseMiddleware<AuditMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
 

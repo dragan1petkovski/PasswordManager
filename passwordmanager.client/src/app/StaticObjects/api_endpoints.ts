@@ -1,5 +1,5 @@
 export class api_endpoints {
-    static readonly me = "api/users/me"
+    static readonly me = "api/user/me"
     static readonly user = "api/user"
 
 
@@ -38,4 +38,5 @@ export class api_endpoints {
 	static readonly clientdetails = "api/client/details"
     static readonly clientcredential = "api/client/credential"
     static readonly clientcertificate = "api/client/certificate"
+
 }

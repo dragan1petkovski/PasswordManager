@@ -33,7 +33,7 @@ namespace Services
             {
                 id = item.id,
                 name = item.name
-            }); ;
+            });
         }
 
         public IEnumerable<ClientDetailResponse> GetClientDetailsResponse()

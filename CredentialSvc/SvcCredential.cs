@@ -2,7 +2,7 @@
 using LayerData;
 using DataTransferObjects.Credential;
 using DomainModel;
-using Services.Audit;
+using DataTransferObjects.User;
 using System.Text;
 
 namespace Services

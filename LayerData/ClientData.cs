@@ -1,5 +1,5 @@
 ﻿using DBLayer;
-using Services.Audit;
+using DataTransferObjects.User;
 
 
 namespace LayerData

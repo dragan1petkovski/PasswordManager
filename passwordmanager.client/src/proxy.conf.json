@@ -6,5 +6,10 @@
     "/login": {
         "target": "https://localhost:5000",
         "secure": false
+    },
+    "/logout": {
+        "target": "https://localhost:5000",
+        "secure": false
     }
+
 }

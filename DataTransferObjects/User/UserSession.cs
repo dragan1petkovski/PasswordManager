@@ -1,6 +1,4 @@
-﻿using DomainModel;
-
-namespace Services.Audit
+﻿namespace DataTransferObjects.User
 {
     public class UserSession
     {
