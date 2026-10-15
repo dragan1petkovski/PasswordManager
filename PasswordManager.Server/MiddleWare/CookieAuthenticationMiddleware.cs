@@ -15,6 +15,11 @@ namespace PasswordManager.Server.MiddleWare
 			if(context.Request.Path != "/login/oauth/callback")
 			{
 				string cookieString = context.Request.Cookies["_id"];
+				if(cookieString is null)
+				{
+					context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+					return ;
+				}
                 AccessTokenResponse token = _cache.Get<UserProfileDetails>(Guid.Parse(cookieString)).token_details;
                 context.Request.Headers.Authorization = $"Bearer {token.access_token}";
                 context.Response.Headers.Remove("Authorization");

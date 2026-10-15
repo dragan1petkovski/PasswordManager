@@ -25,6 +25,17 @@ namespace PasswordManager.Server.Controllers
         [HttpGet("[controller]/oauth/callback")]
         public IActionResult AdfsCallback([FromQuery] string code, [FromQuery] string state, [FromServices] JwtManager jwtManager)
         {
+            //If users is already loggedin to stop making unnecessary request and filling cache 
+            if (Guid.TryParse(Request.Cookies["_id"], out Guid cookieid))
+            {
+                UserProfileDetails userDetails = _cache.Get<UserProfileDetails>(cookieid);
+                if(userDetails is not null)
+                {
+                    return Redirect("/auth");
+                }
+            }
+
+
             using HttpClient client = new HttpClient();
             Dictionary<string, string> tokentRequest = new Dictionary<string, string>
             {
@@ -47,7 +58,7 @@ namespace PasswordManager.Server.Controllers
                     HttpOnly = true,
                     Secure = true,
                     Expires = DateTime.Now.AddMinutes(10),
-                    Domain = "cm.test.local",
+                    Domain = "cm.test.local", //This need to change the reflect binding
                     SameSite = SameSiteMode.Strict
                 };
                 AccessTokenResponse tokenObj = JsonSerializer.Deserialize<AccessTokenResponse>(token.Content.ReadAsStringAsync().Result);
@@ -86,7 +97,7 @@ namespace PasswordManager.Server.Controllers
                 HttpOnly = true,
                 Secure = true,
                 Expires = DateTime.Now.AddMinutes(10),
-                Domain = "cm.test.local",
+                Domain = "cm.test.local", //This need to change the reflect binding
                 SameSite = SameSiteMode.Strict
             };
             

@@ -33,6 +33,10 @@ namespace PasswordManager.Server.Controllers
             if (Guid.TryParse(this.Request.Cookies["_id"], out Guid tokenId))
             {
                 UserSession _userSession = _cache.Get<UserProfileDetails>(tokenId).userSession;
+                if(_userSession is null)
+                {
+                    return NotFound();
+                }
                 UserProfile profile = new UserProfile()
                 {
                     display_name = $"{_userSession.givenname} {_userSession.surname}",
