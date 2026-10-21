@@ -1,4 +1,4 @@
-import { Component, effect, inject,WritableSignal,signal} from "@angular/core"
+import { Component, effect, inject,WritableSignal,signal, OnInit} from "@angular/core"
 import { DatePipe } from "@angular/common";
 import { ConnectionSvc } from "../../../Services/ConnectionSvc/ConnectionSvc";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
@@ -18,7 +18,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 	imports: [AlertComponent,DatePipe,CredentialPopoverComponent]
 })
 
-export class CredentialComponent{
+export class CredentialComponent implements OnInit {
 	clientList:WritableSignal<ClientResponse[]>=signal([])
 	credentialList:WritableSignal<CredentialResponse[]>=signal([])
 	alertService = inject(AlertService);

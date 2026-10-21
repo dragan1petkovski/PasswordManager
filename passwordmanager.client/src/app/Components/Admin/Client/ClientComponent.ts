@@ -1,4 +1,4 @@
-import { Component, inject, effect, WritableSignal, signal} from "@angular/core";
+import { Component, inject, effect, WritableSignal, signal, OnInit} from "@angular/core";
 import { CommonModule,DatePipe } from "@angular/common";
 import {ClientResponse} from '../../../DTO/Client/ClientResponse';
 import {DeleteModalComponent} from '../../Modals/DeleteModalComponent';
@@ -17,7 +17,7 @@ import {AlertService} from '../../../Services/AlertService';
     providers: [ConnectionSvc],
 })
 //Modal animation makes 300ms delay and can cause warning
-export class ClientComponent
+export class ClientComponent implements OnInit
 {
     alertService = inject(AlertService);
 
