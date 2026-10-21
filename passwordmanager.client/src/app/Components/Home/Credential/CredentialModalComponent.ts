@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
@@ -16,7 +16,7 @@ import { GetTeamResponse } from "../../../DTO/Team/GetTeamResponse";
     providers: [ConnectionSvc],
 })
 
-export class CredentialModalComponent{
+export class CredentialModalComponent implements OnInit {
 
 	_updateCredential!: CredentialResponse
 	clientid!: string

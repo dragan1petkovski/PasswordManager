@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LayerDB.Migrations
 {
     /// <inheritdoc />
-    public partial class t0 : Migration
+    public partial class initialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -115,11 +115,8 @@ namespace LayerDB.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    domain = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     remote = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     password = table.Column<byte[]>(type: "varbinary(max)", nullable: true),

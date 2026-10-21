@@ -17,7 +17,7 @@ namespace LayerDB.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.9")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -150,9 +150,6 @@ namespace LayerDB.Migrations
 
                     b.Property<byte[]>("key")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("note")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("password")
                         .HasColumnType("varbinary(max)");

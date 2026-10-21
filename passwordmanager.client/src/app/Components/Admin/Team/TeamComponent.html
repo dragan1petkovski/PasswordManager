@@ -27,7 +27,7 @@
 
     	    </thead>
     	    <tbody class="table-group-divider">
-    	        @for (item of this.itemList; track item) {
+    	        @for (item of this.itemList(); track item) {
     	            <tr>
     	                <td class="ps-2">
     	                    {{item.clientname}}

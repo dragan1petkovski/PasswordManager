@@ -18,10 +18,12 @@ export class LoginComponent {
 		this.oauthService.loadDiscoveryDocument();
 		this.oauthService.clearHashAfterLogin = true
 
+        const _userProfile = inject(UserProfileSvc)
+
 	}
 
 	Login():void {
 		this.oauthService.initLoginFlow()
-        const _userProfile = inject(UserProfileSvc)
+        
 	}
 }

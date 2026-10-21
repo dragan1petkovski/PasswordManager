@@ -1,9 +1,7 @@
-import { Component,signal,ChangeDetectorRef  } from "@angular/core"
+import { Component,OnInit,ChangeDetectorRef  } from "@angular/core"
 import { OAuthService } from "angular-oauth2-oidc";
-import { OidcFlowConfig } from "../../StaticObjects/Configs/oidc.config"
 import { Router, RouterModule } from "@angular/router";
 import { ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
-import { lastValueFrom } from "rxjs"
 
 
 @Component({
@@ -11,7 +9,7 @@ import { lastValueFrom } from "rxjs"
 	templateUrl: "HomeComponent.html",
 	imports: [RouterModule]
 })
-export class HomeComponent
+export class HomeComponent  implements OnInit
 {
 	constructor(private changedetection: ChangeDetectorRef,private router: Router, private conService: ConnectionSvc, private authService: OAuthService){}
 

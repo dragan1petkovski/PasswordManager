@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component,WritableSignal,signal, OnInit } from "@angular/core";
 import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { regex_patterns } from "../../../StaticObjects/regexpatterns";
@@ -15,20 +15,20 @@ import {TeamRequest} from '../../../DTO/Team/TeamRequest';
     providers: [ConnectionSvc],
 })
 
-export class TeamModalComponent
+export class TeamModalComponent implements OnInit
 {
 	constructor(private conService: ConnectionSvc, protected activeModal: NgbActiveModal) {}
-	protected clients: ClientResponse[] = []
+	protected clients: WritableSignal<ClientResponse[]> = signal([])
     protected team!: GetTeamResponse
 	createTeam = new FormGroup({
-		name: new FormControl("",[Validators.required,Validators.pattern(regex_patterns.name)]),
-		clientchoice: new FormControl("")
+		name: new FormControl("",[Validators.required,Validators.pattern(regex_patterns.username)]),
+		clientchoice: new FormControl("",[Validators.required])
 	})
 
     ngOnInit() {
         if(this.team === null)
         {
-            this.conService.GET<ClientResponse[]>(api_endpoints.client).subscribe(res => this.clients = res);
+            this.conService.GET<ClientResponse[]>(api_endpoints.client).subscribe(res => this.clients.set(res));
         }
         else
         {

@@ -1,8 +1,7 @@
-import { Component,ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router, RouterModule } from "@angular/router";
 
 import { OAuthService } from 'angular-oauth2-oidc';
-import { ConnectionSvc } from '../../Services/ConnectionSvc/ConnectionSvc';
 import { OidcFlowConfig } from '../../StaticObjects/Configs/oidc.config';
 
 
@@ -10,12 +9,12 @@ import { OidcFlowConfig } from '../../StaticObjects/Configs/oidc.config';
     selector: "app-login",
     templateUrl: 'AdminComponent.html',
     imports: [RouterModule],
-    providers: [OAuthService,]
+    providers: [OAuthService]
 })
 
-export class AdminComponent
+export class AdminComponent implements OnInit
 {
-	constructor(private changedetection: ChangeDetectorRef,private router: Router, private conService: ConnectionSvc, private authService: OAuthService) {
+	constructor(private router: Router, private authService: OAuthService) {
 
 	}
 
@@ -46,6 +45,12 @@ export class AdminComponent
 				this.RemoveActiveClass()
 				this.router.navigate(["/admin/settings"])
 				this.ActivateNavLinkById("nav-link-settings")
+                break;
+            case 'AuditLogs':
+				this.RemoveActiveClass()
+				this.router.navigate(["/admin/auditlogs"])
+				this.ActivateNavLinkById("nav-link-auditlogs")
+                break;
 		}
 	}
 

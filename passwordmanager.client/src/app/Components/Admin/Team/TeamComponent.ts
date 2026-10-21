@@ -1,4 +1,4 @@
-import { Component, inject, effect } from "@angular/core";
+import { Component, inject, effect,WritableSignal,signal, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { api_endpoints } from "../../../StaticObjects/api_endpoints";
 import {GetTeamResponse} from '../../../DTO/Team/GetTeamResponse';
@@ -18,10 +18,10 @@ import { Team } from "../../../DTO/Team/Team"
     providers: [ConnectionSvc],
 })
 
-export class TeamComponent
+export class TeamComponent implements OnInit
 {
 
-    protected itemList!: GetTeamResponse[]
+    protected itemList: WritableSignal<GetTeamResponse[]> = signal([])
     alertService = inject(AlertService);
     constructor(private http:ConnectionSvc, private modalService: NgbModal) {
         // This is used to make additional request if the HTTP request is successful
@@ -29,14 +29,14 @@ export class TeamComponent
             let temp = this.alertService.GetAlert()()
             if(temp.type === 'success')
             {
-                this.http.GET<GetTeamResponse[]>(api_endpoints.team.concat("/details")).subscribe(res => this.itemList = res)
+                this.http.GET<GetTeamResponse[]>(api_endpoints.team.concat("/details")).subscribe(res => this.itemList.set(res))
             }
         });
 		this.alertService.SetAlert({type: "null", message: "", showAlert: false})
     }
 	ngOnInit()
 	{
-        this.http.GET<GetTeamResponse[]>(api_endpoints.team.concat("/details")).subscribe(res => this.itemList = res)
+        this.http.GET<GetTeamResponse[]>(api_endpoints.team.concat("/details")).subscribe(res => this.itemList.set(res))
 	}
     OpenCreateTeamModal()
 	{

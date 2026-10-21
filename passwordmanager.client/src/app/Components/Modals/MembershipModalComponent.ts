@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 import {ConnectionSvc} from '../../Services/ConnectionSvc/ConnectionSvc';
 import { User } from "../../DTO/User/User"
@@ -15,7 +15,7 @@ import { MembershipRequest } from "../../DTO/Membership/MembershipRequest";
 	templateUrl: "MembershipModalComponent.html",
 	imports: [CdkDropList, CdkDrag,NgFor,DragDropModule ]
 })
-export class MembershipModalComponent{
+export class MembershipModalComponent implements OnInit{
 	protected header!:string
 	protected type!:string
 	private caller!: User | Team;

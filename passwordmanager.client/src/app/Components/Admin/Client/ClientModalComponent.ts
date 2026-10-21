@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {ConnectionSvc} from '../../../Services/ConnectionSvc/ConnectionSvc'
 import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { regex_patterns } from "../../../StaticObjects/regexpatterns";
@@ -15,7 +15,7 @@ import { ClientRequest } from '../../../DTO/Client/CreateClientRequest';
     providers: [ConnectionSvc],
 })
 
-export class ClientModalComponent
+export class ClientModalComponent implements OnInit
 {
 
     _updateClient!: ClientResponse

@@ -1,4 +1,4 @@
-import { Component, inject, effect} from "@angular/core";
+import { Component, inject, effect, WritableSignal, signal} from "@angular/core";
 import { CommonModule,DatePipe } from "@angular/common";
 import {ClientResponse} from '../../../DTO/Client/ClientResponse';
 import {DeleteModalComponent} from '../../Modals/DeleteModalComponent';
@@ -28,15 +28,15 @@ export class ClientComponent
             let temp = this.alertService.GetAlert()()
             if(temp.type === 'success')
             {
-                this.http.GET<ClientResponse[]>(api_endpoints.clientdetails).subscribe(res => this.itemList = res)
+                this.http.GET<ClientResponse[]>(api_endpoints.clientdetails).subscribe(res => this.itemList.set(res))
             }
         });
 		this.alertService.SetAlert({type: "null", message: "", showAlert: false})
     }
-    protected itemList!: ClientResponse[]
+    protected itemList: WritableSignal<ClientResponse[]> = signal([])
 	ngOnInit()
 	{
-        this.http.GET<ClientResponse[]>(api_endpoints.clientdetails).subscribe(res => this.itemList = res)
+        this.http.GET<ClientResponse[]>(api_endpoints.clientdetails).subscribe(res => this.itemList.set(res))
 	}
 
 	SendSearchParameter()

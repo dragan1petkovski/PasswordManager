@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LayerDB.Migrations
 {
     [DbContext(typeof(MSSQLContext))]
-    [Migration("20260828103047_t0")]
-    partial class t0
+    [Migration("20261017190812_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.9")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -151,18 +151,8 @@ namespace LayerDB.Migrations
                     b.Property<DateTime>("createdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("domain")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("key")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("note")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("password")
                         .HasColumnType("varbinary(max)");

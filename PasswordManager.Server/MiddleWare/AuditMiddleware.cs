@@ -25,7 +25,7 @@ namespace PasswordManager.Server.MiddleWare
                 if (context.Request.Method.ToUpper() == "POST" || context.Request.Method.ToUpper() == "PUT" || context.Request.Method.ToUpper() == "DELETE")
                 {
 
-                    _userSession.httpMethod = context.Request.Method.ToUpper();
+                    _userSession.action = context.Request.Method.ToUpper();
                     _userSession.HttpRequestTime = DateTime.Now;
 
                 }

@@ -22,7 +22,7 @@
             </div>
             <div class="col-6">
                 <select name="clients" id="chooseclient" class="form-control w-100" formControlName="clientchoice">
-                    @for (client of clients; track client) {
+                    @for (client of clients(); track client) {
                         <option value={{client.id}}>{{client.name}}</option>
                     }
                 </select>

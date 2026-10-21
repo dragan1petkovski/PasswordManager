@@ -1,4 +1,4 @@
-<div id="ClientComponent">
+<div>
     <div class="d-flex justify-content-between mb-2">
     	<div>
     		<button class="btn btn-outline-dark bi bi-arrow-repeat" (click)="ADSync()" ></button>&nbsp;
@@ -31,7 +31,7 @@
 			
         	    </thead>
         	    <tbody class="table-group-divider">
-        	    <tr *ngFor="let item of this.userList">
+        	    <tr *ngFor="let item of this.userList()">
         	        <td class="ps-2">
         	            {{item.name}}
         	        </td>

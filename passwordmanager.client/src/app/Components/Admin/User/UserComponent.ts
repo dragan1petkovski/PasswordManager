@@ -1,4 +1,4 @@
-import { Component, inject,effect } from "@angular/core";
+import { Component, inject,effect,WritableSignal,signal, OnInit } from "@angular/core";
 import { CommonModule,DatePipe } from "@angular/common";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
@@ -17,13 +17,13 @@ import { ResponseMessage } from "../../../DTO/ResponseMessage/ResponseMessage"
     providers: [ConnectionSvc],
 })
 
-export class UserComponent
+export class UserComponent implements OnInit
 {
 	private routersubscript!: Subscription;
-	protected userList: UserResponse[] = []
-	alertService = inject(AlertService);
+	protected userList: WritableSignal<UserResponse[]> = signal([])
+	private alertService!: AlertService
 	constructor(private http: ConnectionSvc,private modalService: NgbModal) {
-        
+        this.alertService = inject(AlertService);
 		// This is used to make additional request if the HTTP request is successful
         effect(() => {
             let temp = this.alertService.GetAlert()()
@@ -34,7 +34,7 @@ export class UserComponent
     }
 	ngOnInit()
 	{
-		this.http.GET<UserResponse[]>(api_endpoints.user).subscribe(res => this.userList = res)
+		this.http.GET<UserResponse[]>(api_endpoints.user).subscribe(res => this.userList.set(res))
 	}
 
 	ADSync()
@@ -47,7 +47,7 @@ export class UserComponent
                 else
                 {
                     this.alertService.SetAlert({type: 'success',message: `${res.message}`, showAlert: true});
-					this.http.GET<UserResponse[]>(api_endpoints.user).subscribe(res => this.userList = res)
+					this.http.GET<UserResponse[]>(api_endpoints.user).subscribe(res => this.userList.set(res))
                 }
             },
             err => {

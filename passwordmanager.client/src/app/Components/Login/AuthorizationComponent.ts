@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core"
+import { Component, inject, OnInit } from "@angular/core"
 import { UserProfileSvc } from "../../Services/ConnectionSvc/UserProfileSvc"
 import { adfs_roles } from "../../StaticObjects/Configs/AdfsRoles"
 import {Router } from '@angular/router'
@@ -7,7 +7,7 @@ import {Router } from '@angular/router'
     template: ""
 })
 
-export class AuthorizationComponent{
+export class AuthorizationComponent  implements OnInit {
 
     constructor(private router: Router, private _userProfileSvc: UserProfileSvc){
     }
