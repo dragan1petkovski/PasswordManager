@@ -10,6 +10,7 @@ using Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
 using DataTransferObjects.Adfs;
+using PasswordManager.Server.Utilities;
 
 namespace PasswordManager.Server.Controllers
 {
@@ -32,7 +33,7 @@ namespace PasswordManager.Server.Controllers
         {
             if (Guid.TryParse(this.Request.Cookies["_id"], out Guid tokenId))
             {
-                UserSession _userSession = _cache.Get<UserProfileDetails>(tokenId).userSession;
+                UserSession _userSession = _cache.Get<UserSession>(CacheService.GetUserSessionCacheKey(tokenId));
                 if(_userSession is null)
                 {
                     return NotFound();

@@ -5,7 +5,7 @@ using System.Text.Json;
 using DataTransferObjects.Adfs;
 using DataTransferObjects.User;
 using Services.Audit;
-using DataTransferObjects.User;
+using PasswordManager.Server.Utilities;
 using System.Web;
 
 namespace PasswordManager.Server.Controllers
@@ -49,6 +49,7 @@ namespace PasswordManager.Server.Controllers
             string authorization_endpoint = this._configuration.GetSection("oauth2").GetSection("authorization_endpoint").Value;
             HttpContent content = new FormUrlEncodedContent(tokentRequest);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            
             var token = client.PostAsync(authorization_endpoint,content).Result;
             if(token.IsSuccessStatusCode)
             {
@@ -61,16 +62,17 @@ namespace PasswordManager.Server.Controllers
                     Domain = "cm.test.local", //This need to change the reflect binding
                     SameSite = SameSiteMode.Strict
                 };
-                AccessTokenResponse tokenObj = JsonSerializer.Deserialize<AccessTokenResponse>(token.Content.ReadAsStringAsync().Result);
+                string rawtoken = token.Content.ReadAsStringAsync().Result;
+                AccessTokenResponse tokenObj = JsonSerializer.Deserialize<AccessTokenResponse>(rawtoken);
                 Guid tokenId = Guid.NewGuid();
 
                 UserSession _userSession = jwtManager.GetUserDetails(tokenObj.access_token);
 
-                UserProfileDetails _userProfileDetails = new UserProfileDetails() { userSession = _userSession, token_details = tokenObj };
-                this._cache.Set<UserProfileDetails>(tokenId, _userProfileDetails, TimeSpan.FromMinutes(10));
+                this._cache.Set<UserSession>(CacheService.GetUserSessionCacheKey(tokenId),_userSession , TimeSpan.FromMinutes(10));
+                this._cache.Set<AccessTokenResponse>(CacheService.GetAdfsCacheKey(tokenId), tokenObj, TimeSpan.FromMinutes(10));
+
                 this.Response.Cookies.Append("_id",tokenId.ToString() , cookieOptions);
 
-                var temp = this._cache.Get<UserProfileDetails>(tokenId);
                 return Redirect("/auth");
 
             }
@@ -102,7 +104,11 @@ namespace PasswordManager.Server.Controllers
             };
             
             Response.Cookies.Delete("_id", cookieOptions);
-            _cache.Remove(cookieId);
+
+            _cache.Remove(CacheService.GetUserSessionCacheKey(cookieId));
+            _cache.Remove(CacheService.GetAdfsCacheKey(cookieId));
+            _cache.Remove(CacheService.GetPasswordCacheKey(cookieId));
+
             return Ok(uriBuilder.Uri.ToString());
         }
     }
